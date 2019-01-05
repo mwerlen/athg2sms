@@ -6,6 +6,7 @@ buildscript {
      */
     repositories {
         jcenter()
+        google()
     }
 
     /**
@@ -13,7 +14,7 @@ buildscript {
      * the Gradle plugin for the buildscript.
      */
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.2.1'
     }
 }
 
@@ -29,13 +30,19 @@ apply plugin: 'com.android.application'
  * following line includes all the JAR files in the libs directory.
  */
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
     // Add other library dependencies here (see the next step)
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:23.0.1'
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.android.support:support-v4:23.0.1'
-    compile 'com.github.mifmif:generex:1.0.2'
+    testImplementation 'junit:junit:4.12'
+
+    // Required for instrumented tests
+    androidTestImplementation 'com.android.support:support-annotations:24.0.0'
+    androidTestImplementation 'com.android.support.test:runner:0.5'
+
+    implementation 'com.android.support:design:23.0.1'
+    implementation 'com.android.support:appcompat-v7:23.0.1'
+    implementation 'com.android.support:support-v4:23.0.1'
+    implementation 'com.github.mifmif:generex:1.0.2'
 }
 
 /**
@@ -45,7 +52,7 @@ dependencies {
  */
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '25.0.3'
     /**
      * This nested sourceSets block points the source code directories to the
      * existing folders in the project, instead of using the default new
