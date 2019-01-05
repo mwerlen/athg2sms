@@ -35,7 +35,8 @@ public enum BuiltInFormat {
     XmlMessage ("XmlMessage", "<Message>\\s*<Recepients(?:[\\s]*\\/>|>\\s*<string>$(sent:address)<\\/string>\\s*<\\/Recepients>)\\s*<Body(?:[\\s]*\\/>|>$(body)<\\/Body>)\\s*<IsIncoming>$(folder)<\\/IsIncoming>\\s*<IsRead>(?:[^<]+)<\\/IsRead>\\s*<Attachments(?:.*?\\/>)\\s*<LocalTimestamp>$(localtimestamp)<\\/LocalTimestamp>\\s*<Sender(?:[\\s]*\\/>|>$(inbox:address)<\\/Sender>)\\s*<\\/Message>",
             "<Message><Recepients[sent?]><string>$(sent:address)</string></Recepients>[:] />[;]<Body>$(body)</Body><IsIncoming>$(folder)</IsIncoming><IsRead>true</IsRead><Attachments /><LocalTimestamp>$(localtimestamp)</LocalTimestamp><Sender[inbox?]>$(inbox:address)</Sender>[:] />[;]</Message>", "true", "false"),
     WeirdVictorFormat("Weird Victor Format", "[\\s]*[^,]*,$(address),$(body),$(dated/M/yy HH:mm),$(folder),[^,]*,,[^\\n]*\\n",
-            "1,$(address),$(body),$(dated/M/yy HH:mm),$(folder),1,,", "receive", "send");
+            "1,$(address),$(body),$(dated/M/yy HH:mm),$(folder),1,,", "receive", "send"),
+    StephFormat("Steph Format", "<Message>\\s*<From(?:[\\s]*\\/>|>\\s*$(inbox:address)\\s*<\\/From>)\\s*<To(?:[\\s]*\\/>|>$(sent:address)<\\/To>)\\s*<Folder>$(folder)</Folder>\\s*<Date>$(dateyyyy-M-d H:m:s)<\\/Date>\\s*<Body(?:[\\s]*\\/>|>$(body)<\\/Body>)\\s*<\\/Message>", "1,$(address),$(body),$(dated/M/yy HH:mm),$(folder),1,,", "INBOX", "SENT");
 
     private final String completeName;
     private final String format;
